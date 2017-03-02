@@ -6,6 +6,7 @@ const helpers = require('./helpers');
 module.exports = {
   entry: {
     'app': './src/main.ts',
+    'vendor': './src/vendor.ts',
     'styles': './src/scss/main.scss'
   },
   resolve: {
@@ -28,8 +29,8 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader!sass-loader?config=nodeSassConfig'
+          // use: 'style-loader',
+          use: 'css-loader!sass-loader?config=nodeSassConfig'
         })
       }
     ]
