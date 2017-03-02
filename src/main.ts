@@ -15,9 +15,7 @@ function domready(): Promise<any> {
 
 class App {
 
-  private isPlaying = false;
-
-  private state$ = new Subject();
+  private store$ = new Subject<AppState>();
 
   constructor() {
   }
@@ -25,20 +23,21 @@ class App {
   bootstrap(): void {
     console.log('bootstrapped');
     this.bindEvent();
-    this.state$.subscribe(() => {
-      console.log(this.isPlaying);
+    this.store$.subscribe(state => {
+      console.log(state);
     });
+    this.store$.next(initialState);
   }
 
   private bindEvent(): void {
     const control = document.querySelector('.control-noise');
     const click$ = Observable.fromEvent(control, 'click');
-    click$.subscribe(this.controlNoise.bind(this));
+    click$.withLatestFrom(this.store$).subscribe(this.controlNoise.bind(this));
   }
 
-  private controlNoise(): void {
-    this.isPlaying = !this.isPlaying;
-    this.state$.next();
+  private controlNoise([event, state]): void {
+    const newState: AppState = {...state, isPlaying: !state.isPlaying};
+    this.store$.next(newState);
   }
 }
 
@@ -47,3 +46,12 @@ domready().then(() => {
   const app = new App();
   app.bootstrap();
 });
+
+
+interface AppState {
+  isPlaying: boolean;
+}
+
+const initialState: AppState = {
+  isPlaying: false,
+}
