@@ -12,6 +12,7 @@
     "rxjs": "^5.2.0"
   },
   "devDependencies": {
+    "@types/node": "^7.0.8",
     "awesome-typescript-loader": "^3.0.8",
     "css-loader": "^0.26.2",
     "extract-text-webpack-plugin": "^2.0.0",
