@@ -1,8 +1,14 @@
+import { Noise } from './noise';
+
+
 export class App {
 
   private state: AppState = AppState.Stopped;
 
+  private noise: Noise;
+
   constructor() {
+    this.noise = new Noise();
   }
 
   bootstrap(): void {
@@ -41,11 +47,17 @@ export class App {
   private enterState(state: AppState): void {
     document.body.classList.add(CSSClassesByState.get(state));
     setTimeout(() => document.body.classList.add('run'));
+    if (state === AppState.Playing) {
+      this.noise.start();
+    }
   }
 
   private leaveState(state: AppState): void {
     document.body.classList.remove(CSSClassesByState.get(state));
     document.body.classList.remove('run');
+    if (state === AppState.Playing) {
+      this.noise.stop();
+    }
   }
 }
 
