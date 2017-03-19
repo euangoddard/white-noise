@@ -6,7 +6,6 @@ const helpers = require('./helpers');
 module.exports = {
   entry: {
     'app': './src/main.ts',
-    'vendor': './src/vendor.ts',
     'styles': './src/scss/main.scss'
   },
   resolve: {

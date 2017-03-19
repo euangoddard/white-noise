@@ -1,5 +1,141 @@
+$colour-light: #fff;
+$colour-dark: #000;
+
 
 body {
   margin: 0;
   padding: 0;
+}
+
+%circle {
+  display: block;
+  width: 50vmin;
+  height: 50vmin;
+  border-radius: 50%;
+}
+
+.control {
+  @extend %circle;
+
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  text-decoration: none;
+
+  border: none;
+
+  user-select: none;
+
+  font-family: inherit;
+
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+  
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}
+
+.start {
+  color: $colour-dark;
+  background-color: $colour-light;
+}
+
+.stop {
+  color: $colour-light;
+  background-color: $colour-dark;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%raised {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+@for $level from 1 through 4 {
+  .raise-#{$level} {
+    @extend %raised;
+    z-index: $level;
+  }
+}
+
+.stopped,
+.starting {
+  background: $colour-dark;
+}
+
+.playing,
+.stopping {
+  background: $colour-light;
+}
+
+%mask {
+  @extend %circle;
+
+  transition: transform 0.5s ease;
+
+  .run & {
+    transform: scale(5);
+  }
+}
+
+.mask-light {
+  @extend %mask;
+  background-color: $colour-light;
+}
+
+.mask-dark {
+  @extend %mask;
+  background-color: $colour-dark;
+}
+
+
+.starting-mask-container {
+  display: none;
+
+  .starting & {
+    display: flex;
+  }
+}
+
+.stopping-mask-container {
+  display: none;
+
+  .stopping & {
+    display: flex;
+  }
+}
+
+
+.start-control-container {
+  display: none;
+
+  .stopped &,
+  .stopping & {
+    display: flex;
+  }
+}
+
+.stop-control-container {
+  display: none;
+
+  .playing &,
+  .starting & {
+    display: flex;
+  }
 }

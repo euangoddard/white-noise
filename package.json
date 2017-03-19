@@ -9,7 +9,7 @@
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "dependencies": {
-    "rxjs": "^5.2.0"
+    "tslib": "^1.6.0"
   },
   "devDependencies": {
     "@types/node": "^7.0.8",
