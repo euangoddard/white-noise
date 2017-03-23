@@ -46,7 +46,7 @@ export class App {
 
   private enterState(state: AppState): void {
     document.body.classList.add(CSSClassesByState.get(state));
-    setTimeout(() => document.body.classList.add('run'));
+    wait().then(() => document.body.classList.add('run'));
     if (state === AppState.Playing) {
       this.noise.start();
     }
@@ -75,3 +75,7 @@ const CSSClassesByState = new Map<AppState, string>([
   [AppState.Playing, 'playing'],
   [AppState.Stopping, 'stopping'],
 ]);
+
+function wait(): Promise<any> {
+  return new Promise(resolve => setTimeout(resolve, 10));
+}
