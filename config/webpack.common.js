@@ -29,8 +29,7 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
-          // use: 'style-loader',
-          use: 'css-loader!sass-loader?config=nodeSassConfig'
+          use: 'css-loader?minimize=true§!sass-loader?config=nodeSassConfig'
         })
       }
     ]
