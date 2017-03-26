@@ -70,7 +70,7 @@ body {
   overflow: hidden;
 }
 
-@for $level from 1 through 4 {
+@for $level from 1 through 5 {
   .raise-#{$level} {
     @extend %raised;
     z-index: $level;
@@ -99,12 +99,12 @@ body {
 
 .mask-light {
   @extend %mask;
-  background-color: $colour-light;
+  background: $colour-light;
 }
 
 .mask-dark {
   @extend %mask;
-  background-color: $colour-dark;
+  background: $colour-dark;
 }
 
 
@@ -140,5 +140,20 @@ body {
   .playing &,
   .starting & {
     display: flex;
+  }
+}
+
+
+.loading {
+  color: $colour-light;
+  background: #263238;
+  font-family: sans-serif;
+  font-size: 18px;
+
+  .stopped &,
+  .starting &,
+  .playing &,
+  .stopping & {
+    display: none;
   }
 }
