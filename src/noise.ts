@@ -1,4 +1,4 @@
-const audioCtx = new (AudioContext || window['webkitAudioContext']);
+const audioCtx = new (window['AudioContext'] || window['webkitAudioContext']);
 
 export class Noise {
   private static CHANNELS = 2;
